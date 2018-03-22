@@ -188,22 +188,6 @@
     
     
    
-    var video = document.createElement( 'video' );
-    video.src = "videos/sintel.ogv";
-    video.load(); // must call after setting/changing source
-    video.play();
-    var videoImage = document.createElement( 'canvas' );
-    videoImage.width = 480;
-    videoImage.height = 204;
-
-    videoImageContext = videoImage.getContext( '2d' );
-// background color if no video present
-    videoImageContext.fillStyle = '#000000';
-    videoImageContext.fillRect( 0, 0, videoImage.width, videoImage.height );
-
-    videoTexture = new THREE.Texture( videoImage );
-    videoTexture.minFilter = THREE.LinearFilter;
-    videoTexture.magFilter = THREE.LinearFilter;
 
 	//////////////////////////////////////////////////////////////////////////////////
     
