@@ -1,0 +1,82 @@
+<html lang=”en”>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Name of your awesome camera app -->
+    <title>Camera App</title>
+    <!-- Link to your main style sheet-->
+    <link rel="stylesheet" href="style.css">
+    
+<!--    <script src="app.js"></script>-->
+    
+</head>
+<body>
+    <!-- Camera -->
+    <main id="camera">
+        <!-- Camera sensor -->
+        <canvas id="camera--sensor"></canvas>
+        <!-- Camera view -->
+        <video id="camera--view" autoplay playsinline></video>
+        <!-- Camera output -->
+        <img src="//:0" alt="" id="camera--output">
+        <!-- Camera trigger -->
+<!--        <button id="camera--trigger">Take a picture</button>-->
+        
+<!--        ----------------------------------------------------------- -->
+        <canvas id="foreground"></canvas>
+        <script>
+		var counter = 0;
+		setInterval(function(){
+		var myCanvas = document.getElementById('foreground');
+		var ctx = myCanvas.getContext('2d');
+		var img = new Image;
+		img.onload = function(){
+              var imgWidth = img.naturalWidth;
+              var screenWidth  = myCanvas.width;
+              var scaleX = 1;
+              if (imgWidth > screenWidth)
+                  scaleX = screenWidth/imgWidth;
+              var imgHeight = img.naturalHeight;
+              var screenHeight = myCanvas.height;
+              var scaleY = 1;
+              if (imgHeight > screenHeight)
+                  scaleY = screenHeight/imgHeight;
+              var scale = scaleY;
+              if(scaleX < scaleY)
+                  scale = scaleX;
+              if(scale < 1){
+                  imgHeight = imgHeight*scale;
+                  imgWidth = imgWidth*scale;          
+              }
+
+              myCanvas.height = imgHeight;
+              myCanvas.width = imgWidth;
+            
+		   ctx.drawImage(img,0,0, img.naturalWidth, img.naturalHeight, 0,0, imgWidth, imgHeight);
+		};
+
+		// I had 4 images in my folder so I checked with 4.
+		if(counter == 99) counter = 0;
+		
+		// assuming that your image sequence is named 1.jpg, 2.jpg, 3.jpg ....
+		img.src = counter + '.png';
+
+		counter++;
+		
+		// I set the interval to 100 ms, increase or decrease as per your need.
+		// If you don't want loop use clearTimeout()
+		}, 100);
+		</script>
+        
+        
+        
+        
+<!--        ----------------------------------------------------------- -->
+        <img src="footer.png" alt="" id="footer">
+        
+    </main>
+    <!-- Reference to your JavaScript file -->
+    <script src="app.js"></script>
+</body>
+</html>
